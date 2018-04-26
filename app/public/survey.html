@@ -10,7 +10,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 
 </head>
 
@@ -28,7 +28,7 @@
             <br>
 
             <div class="text-center">
-                <a href="">
+                <a href="/">
                     <button type="button" class="btn btn-lg btn-primary">
                         <span class="glyphicon glyphicon-home"></span> Home</button>
                 </a>
@@ -227,34 +227,54 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <script>
-        // Grab the URL of the website
-        var currentURL = window.location.origin;
-        // capture the form inputs
-        $("#submit").on("click", function () {
-            // event.preventDefault();
+        //   $("#submit").on("click", function (event) {
+        //     event.preventDefault();
 
-            if (($("#name").val().trim() !== "") && ($("photo").val().trim() !== "")) {
+        //     if (($("#name").val().trim() !== "") && ($("#photo").val().trim() !== "")) {
+        //         // create a user object for user data
+        //         var newFriend = {
+        //             name: $("#name").val(),
+        //             photo: $("#photo").val(),
+        //             scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(),
+        //                 $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()
+        //             ]
+        //         };
+        //         console.log(newFriend);
+        //         $.post("api/friends", newFriend, function(data){
+        //             console.log("You've been added to the list!");
+        //         })
+        //     }
+        //  });
+        // Grab the URL of the website
+        // var currentURL = window.location.origin;
+        // capture the form inputs
+        $("#submit").on("click", function (event) {
+            event.preventDefault();
+
+            if (($("#name").val().trim() !== "") && ($("#photo").val().trim() !== "")) {
                 // create a user object for user data
-                var userData = {
+                var newFriend = {
                     name: $("#name").val(),
                     photo: $("#photo").val(),
-                    score: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(),
+                    scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(),
                         $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()
                     ]
                 }
-
-                // AJAX posts the data to friends API
-                $.post(currentURL + "/api/friends", userData, function (data) {
+                    $.post("/api/friends", newFriend, function (data) {
+                    console.log("You've been added!");
+                    console.log(data);
                     // Grab the results from the AJAX so that the best match's name and photos are displayed
-                    $("#matchName").text(data.name);
-                    $("#matchImg").attr("src", data.photo);
-
-                    // show the modal with the best match
-                    $("#resultsModal").modal('toggle');
+                    // $("#matchName").text(data.name);
+                    // $("#matchImg").attr("src", data.photo);
+                        
+                    // // show the modal with the best match
+                    // $("#resultsModal").modal('toggle');
                     // clear the inputs in the form
                     $("#name").val("");
                     $("#photo").val("");
                 })
+                // AJAX posts the data to friends API
+              
             } else {
                 $(".modal-title").text("Missing required information");
                 $(".modal-body").html("<h3>Please complete the form before submitting</h3>");
