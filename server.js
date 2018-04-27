@@ -10,7 +10,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 //makes static assets in the public folder available 
-// app.use(express.static('app/public'));
+app.use(express.static('app/public'));
 // Sets up the Express app to handle data parsing
 // Middleware
 app.use(bodyParser.json());

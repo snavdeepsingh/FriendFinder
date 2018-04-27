@@ -33,25 +33,20 @@ module.exports = function (app) {
         var totalDifference = 0;
         // var leastDiff = 0;
      for(let x = 0; x < friends[i].scores.length; x++){
-       var difference = Math.abs(parseInt(newFriend.scores[x]) - friends[i].scores[x]);
+       var difference = Math.abs((newFriend.scores[x]) - friends[i].scores[x]);
        totalDifference += difference;
-      //  console.log(totalDifference);
      }
     //  console.log(totalDifference);
      scoreComparison.push(totalDifference);
      var min = Math.min.apply(Math, scoreComparison)
-     console.log(scoreComparison);
-      console.log(scoreComparison.indexOf(min) + "Your Match!");
-    //  leastDiff = totalDifference     
-    //  if (totalDifference < leastDiff) {
-    //    leastDiff = totalDifference
-    //  }
-    //  console.log(`we've got a winner: ${leastDiff}`)
-      // console.log(friends[i].scores);
-      // var difference = friends[friends.length].scores[value]-friends[i].scores[value];
-      // console.log(difference);
+    //  console.log(scoreComparison);
+      // console.log(scoreComparison.indexOf(min) + "Your Match!");
+      var bestMatchIndex = scoreComparison.indexOf(min);
+      var bestMatch = friends[bestMatchIndex];
+      console.log(bestMatch);
+    
    }
-    res.json(req.body);
+    res.json(bestMatch);
   });
 }
  
